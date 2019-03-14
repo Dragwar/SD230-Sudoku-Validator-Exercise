@@ -1,4 +1,6 @@
-﻿namespace SudokuValidator
+﻿using System;
+
+namespace SudokuValidator
 {
     public class Program
     {
@@ -92,7 +94,14 @@
 
         public static void Main()
         {
-            
+            SudokuValidator validator = new SudokuValidator(ValidBoard);
+            validator.CheckValidRows();
+
+
+
+
+            Console.WriteLine("Press Any Key To Exit . . .");
+            Console.ReadKey(false);
         }
     }
 }
