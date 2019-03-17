@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace SudokuValidator
 {
     public class Program
@@ -79,7 +78,7 @@ namespace SudokuValidator
             // extra column
             {4, 2, 6, 8, 5, 3, 7, 9, 1}// column length can only be 9
         };
-        public static int[,] InvalidBoardRowLength = new int[9,10]
+        public static int[,] InvalidBoardRowLength = new int[9, 10]
         {
             {5, 3, 4, 6, 7, 8, 9, 1, 2, 1}, // row length should be 9 and numbers don't work
             {6, 7, 2, 1, 9, 5, 3, 4, 8, 2}, // row length should be 9 and numbers don't work
@@ -95,12 +94,30 @@ namespace SudokuValidator
         public static void Main()
         {
             SudokuValidator validator = new SudokuValidator(ValidBoard);
-            validator.CheckValidRows();
+            //validator.CheckValidRows();
+
+            // print first row
+            foreach (var item in validator.GetRow(0))
+            {
+                if (item == validator.GetRow(0)[validator.GetRow(0).Length - 1])
+                    Console.Write(item);
+                else
+                    Console.Write(item + ", ");
+            }
+            Console.WriteLine();
+
+            // print first column
+            foreach (var item in validator.GetColumn(0))
+            {
+                if (item == validator.GetColumn(0)[validator.GetColumn(0).Length - 1])
+                    Console.Write(item);
+                else
+                    Console.Write(item + ", ");
+            }
 
 
 
-
-            Console.WriteLine("Press Any Key To Exit . . .");
+            Console.WriteLine("\n\nPress Any Key To Exit . . .");
             Console.ReadKey(false);
         }
     }
