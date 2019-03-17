@@ -5,15 +5,26 @@ namespace SudokuValidator
     {
         public static void Main()
         {
-            SudokuValidator validator = new SudokuValidator(SudokuBoards.ValidBoard);
-            //validator.CheckValidRows();
+            SudokuValidator validator = new SudokuValidator(SudokuBoards.InvalidBoardColumnLength);
 
-            // print first row
-            validator.GetRow(0).PrintInOneLine("First Row:");
+            Console.WriteLine("Sudoku Board:");
+            for (int i = 0; i < validator.SudokuBoard.GetLength(0); i++)
+            {
+                Console.WriteLine();
+                validator.GetRow(i).PrintInOneLine();
+            }
 
-            // print first column
-            validator.GetColumn(0).PrintInOneLine("First Column:");
+            Console.WriteLine("\n\nHas A Valid Board Size?");
+            Console.WriteLine(validator.IsValidBoardSize());
 
+            Console.WriteLine("\n\nHas Valid Number Values?");
+            Console.WriteLine(validator.IsValidNumberValues());
+
+            Console.WriteLine("\n\nHas Valid Rows?");
+            Console.WriteLine(validator.IsValidRows());
+
+            Console.WriteLine("\n\nHas Valid Columns?");
+            Console.WriteLine(validator.IsValidColumns());
 
 
             Console.WriteLine("\n\nPress Any Key To Exit . . .");
