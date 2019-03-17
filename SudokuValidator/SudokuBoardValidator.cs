@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SudokuValidator
 {
@@ -72,6 +74,68 @@ namespace SudokuValidator
             }
             return column;
         }
+
+
+        //public enum SquareXPosition
+        //{
+        //    Left = 0,
+        //    Middle = 3,
+        //    Right = 6,
+        //}
+        //public enum SquareYPosition
+        //{
+        //    Top = 3,
+        //    Middle = 6,
+        //    Bottom = 9,
+        //}
+
+        //public int[] GetSquare(SquareXPosition rowPosition = SquareXPosition.Right, SquareYPosition columnPosition = SquareYPosition.Middle)
+        //{
+        //    List<int> square = new List<int>();
+        //    for (int i = 0; i < SudokuBoard.GetLength(0); i++)
+        //    {
+        //        int[] currentRow = GetRow(i).Skip((int)rowPosition).Take(3).ToArray();
+        //        //int[] a = currentRow.Skip(1).Take(3).ToArray();
+        //        square.AddRange(currentRow);
+        //        //foreach (var item in a)
+        //        //{
+        //        //    Console.Write($"{item}, ");
+        //        //}
+
+        //    }
+
+        //    switch (rowPosition)
+        //    {
+        //        case SquareXPosition.Middle:
+        //            return square.Skip((int)rowPosition * 3).ToArray();
+        //        case SquareXPosition.Right:
+        //            return square.Skip((int)rowPosition * 3).ToArray();
+        //        default:
+        //            return square.ToArray();
+        //    }
+
+        //}
+        //public void GetSquare()
+        //{
+
+        //    for (int i = 0; i < SudokuBoard.GetLength(0); i++)
+        //    {
+        //        List<int> square = new List<int>();
+
+        //        int[] row = GetRow(i).Skip((int)SquareXPosition.Left).Take(3).ToArray();
+        //        square.AddRange(row);
+
+        //        for (int j = 0; j < 3; j++)
+        //        {
+        //            int[] col = GetColumn(j).Skip(1).Take(2).ToArray();
+        //            square.AddRange(col);
+        //        }
+
+
+        //    }
+
+
+        //}
 
 
         public bool IsValidRows()
