@@ -5,9 +5,9 @@ namespace SudokuValidator
     {
         public static void Main()
         {
-            SudokuValidator validator = new SudokuValidator(SudokuBoards.InvalidBoardColumnLength);
+            SudokuBoardValidator validator = new SudokuBoardValidator(SudokuBoards.ValidBoard);
 
-            Console.WriteLine("Sudoku Board:");
+            Console.WriteLine($"Sudoku Board ({nameof(SudokuBoards.ValidBoard)}):");
             for (int i = 0; i < validator.SudokuBoard.GetLength(0); i++)
             {
                 Console.WriteLine();
@@ -25,6 +25,9 @@ namespace SudokuValidator
 
             Console.WriteLine("\n\nHas Valid Columns?");
             Console.WriteLine(validator.IsValidColumns());
+
+            //Console.WriteLine("\n\nHas Valid Squares?");
+            //Console.WriteLine(validator.IsValidSqaures());
 
 
             Console.WriteLine("\n\nPress Any Key To Exit . . .");

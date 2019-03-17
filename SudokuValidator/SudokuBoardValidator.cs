@@ -2,11 +2,11 @@
 
 namespace SudokuValidator
 {
-    public class SudokuValidator
+    public class SudokuBoardValidator
     {
         public int[,] SudokuBoard { get; private set; }
 
-        public SudokuValidator(int[,] sudokuBoard)
+        public SudokuBoardValidator(int[,] sudokuBoard)
         {
             SudokuBoard = sudokuBoard;
         }
@@ -157,5 +157,31 @@ namespace SudokuValidator
         }
 
 
+        [Obsolete("Not Implemented Yet", true)]
+        public bool IsValidSqaures()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public bool IsValidBoard()
+        {
+            bool[] validators = new bool[]
+            {
+                IsValidBoardSize(),
+                IsValidColumns(),
+                IsValidNumberValues(),
+                IsValidRows(),
+                //IsValidSqaures(), // not implemented yet
+            };
+            foreach (bool boolean in validators)
+            {
+                if (!boolean)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
