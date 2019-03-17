@@ -1,4 +1,5 @@
 using SudokuValidator;
+using System;
 using Xunit;
 
 namespace SudokuBoardXTest
@@ -10,6 +11,9 @@ namespace SudokuBoardXTest
         {
             SudokuBoardValidator validator = new SudokuBoardValidator(SudokuBoards.InvalidBoardRow);
             Assert.False(validator.IsValidRows());
+
+            validator = new SudokuBoardValidator(SudokuBoards.ValidBoard);
+            Assert.True(validator.IsValidRows());
         }
 
         [Fact]
@@ -17,6 +21,9 @@ namespace SudokuBoardXTest
         {
             SudokuBoardValidator validator = new SudokuBoardValidator(SudokuBoards.InvalidBoardColumn);
             Assert.False(validator.IsValidColumns());
+
+            validator = new SudokuBoardValidator(SudokuBoards.ValidBoard);
+            Assert.True(validator.IsValidRows());
         }
 
         //[Fact]
@@ -24,6 +31,9 @@ namespace SudokuBoardXTest
         //{
         //    SudokuBoardValidator validator = new SudokuBoardValidator(SudokuBoards.InvalidBoardSqaure);
         //    Assert.False(validator.IsValidSqaures());
+        //
+        //    validator = new SudokuBoardValidator(SudokuBoards.ValidBoard);
+        //    Assert.True(validator.IsValidSqaures());
         //}
 
         [Fact]
@@ -31,20 +41,33 @@ namespace SudokuBoardXTest
         {
             SudokuBoardValidator validator = new SudokuBoardValidator(SudokuBoards.InvalidBoardNumber);
             Assert.False(validator.IsValidNumberValues());
+
+            validator = new SudokuBoardValidator(SudokuBoards.ValidBoard);
+            Assert.True(validator.IsValidNumberValues());
         }
 
         [Fact]
         public void InvalidColumnSize()
         {
-            SudokuBoardValidator validator = new SudokuBoardValidator(SudokuBoards.InvalidBoardColumnLength);
-            Assert.False(validator.IsValidBoardSize());
+            Assert.Throws<ArgumentException>(() => new SudokuBoardValidator(SudokuBoards.InvalidBoardColumnLength));
+
+            SudokuBoardValidator validator = new SudokuBoardValidator(SudokuBoards.InvalidBoardColumn);
+            Assert.True(validator.IsValidBoardSize());
+
+            validator = new SudokuBoardValidator(SudokuBoards.ValidBoard);
+            Assert.True(validator.IsValidBoardSize());
         }
 
         [Fact]
         public void InvalidRowSize()
         {
-            SudokuBoardValidator validator = new SudokuBoardValidator(SudokuBoards.InvalidBoardRowLength);
-            Assert.False(validator.IsValidBoardSize());
+            Assert.Throws<ArgumentException>(() => new SudokuBoardValidator(SudokuBoards.InvalidBoardRowLength));
+
+            SudokuBoardValidator validator = new SudokuBoardValidator(SudokuBoards.InvalidBoardRow);
+            Assert.True(validator.IsValidBoardSize());
+
+            validator = new SudokuBoardValidator(SudokuBoards.ValidBoard);
+            Assert.True(validator.IsValidBoardSize());
         }
 
         [Fact]

@@ -8,6 +8,10 @@ namespace SudokuValidator
 
         public SudokuBoardValidator(int[,] sudokuBoard)
         {
+            if (sudokuBoard.LongLength != 81)
+            {
+                throw new ArgumentException("SudokuBoardValidator can only take in a board that contains 81 elements");
+            }
             SudokuBoard = sudokuBoard;
         }
 
