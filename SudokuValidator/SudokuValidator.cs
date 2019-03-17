@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace SudokuValidator
 {
@@ -12,15 +11,16 @@ namespace SudokuValidator
             SudokuBoard = sudokuBoard;
         }
 
+
         public int[] GetRow(int rowNumber)
         {
             if (rowNumber > 9)
             {
-                throw new IndexOutOfRangeException($"Sudoku board's max row length is 9 (your number was: {rowNumber})");
+                throw new ArgumentOutOfRangeException($"Sudoku board's max row length is 9 (your number was: {rowNumber})");
             }
             else if (rowNumber < 0)
             {
-                throw new IndexOutOfRangeException($"Sudoku board's min row length is 0 (your number was: {rowNumber})");
+                throw new ArgumentOutOfRangeException($"Sudoku board's min row length is 0 (your number was: {rowNumber})");
             }
             int[] row = new int[9];
 
@@ -40,15 +40,16 @@ namespace SudokuValidator
             return row;
         }
 
+
         public int[] GetColumn(int columnNumber)
         {
             if (columnNumber > 9)
             {
-                throw new IndexOutOfRangeException($"Sudoku board's max column length is 9 (your number was: {columnNumber})");
+                throw new ArgumentOutOfRangeException($"Sudoku board's max column length is 9 (your number was: {columnNumber})");
             }
             else if (columnNumber < 0)
             {
-                throw new IndexOutOfRangeException($"Sudoku board's min column length is 0 (your number was: {columnNumber})");
+                throw new ArgumentOutOfRangeException($"Sudoku board's min column length is 0 (your number was: {columnNumber})");
             }
             int[] column = new int[9];
 
@@ -69,21 +70,92 @@ namespace SudokuValidator
         }
 
 
-
-        // only testing displaying all values from the array
         public bool IsValidRows()
         {
-            // first dimension (where the int[] arrays are stored)
             for (int i = 0; i < SudokuBoard.GetLength(0); i++)
             {
-                // second dimension (where the int values are stored)
-                for (int j = 0; j < SudokuBoard.GetLength(1); j++)
+                int[] currentRow = GetRow(i);
+                foreach (int currentNumber in currentRow)
                 {
-                    // just printing all values right now
-                    Console.WriteLine(SudokuBoard[i, j]);
+                    // should always end up being 1 for each iteration
+                    // unless duplicate was found
+                    int numberOccurrenceCounter = 0;
+                    foreach (int number in currentRow)
+                    {
+                        if (currentNumber == number)
+                        {
+                            // should always find one of the same number
+                            // but if the counter goes above 1 then the row is invalid
+                            numberOccurrenceCounter++;
+                        }
+
+                        if (numberOccurrenceCounter > 1)
+                        {
+                            return false;
+                        }
+                    }
                 }
             }
-            return false;
+            return true;
         }
+
+
+        public bool IsValidColumns()
+        {
+            for (int i = 0; i < SudokuBoard.GetLength(1); i++)
+            {
+                int[] currentColumn = GetColumn(i);
+                foreach (int currentNumber in currentColumn)
+                {
+                    // should always end up being 1 for each iteration
+                    // unless duplicate was found
+                    int numberOccurrenceCounter = 0;
+                    foreach (int number in currentColumn)
+                    {
+                        if (currentNumber == number)
+                        {
+                            // should always find one of the same number
+                            // but if the counter goes above 1 then the row is invalid
+                            numberOccurrenceCounter++;
+                        }
+
+                        if (numberOccurrenceCounter > 1)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+
+        public bool IsValidNumberValues()
+        {
+            foreach (int number in SudokuBoard)
+            {
+                if (number < 1 || number > 9)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+
+        public bool IsValidBoardSize()
+        {
+            if (SudokuBoard.GetLength(0) != 9)
+            {
+                return false;
+            }
+            if (SudokuBoard.GetLength(1) != 9)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
     }
 }
